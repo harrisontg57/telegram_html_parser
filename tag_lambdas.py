@@ -10,9 +10,11 @@ def has_href(tag):
     return tag.has_attr('href')
 
 def get_text_from_messagetag(mtag):
-    #ttag = mtag.find(class_="text")
     try:
-        text = mtag.text.strip()
+        texttag = mtag.find(class_="text")
+        for br in texttag.find_all("br"):
+            br.replace_with("\n")
+        text = texttag.text.strip()
     except:
         text = ""
     return text
